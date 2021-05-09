@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use Auth;
+use App\User;
 class LoginController extends Controller
 {
-    /*
+    /*  
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -19,14 +21,14 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers; 
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = 
 
     /**
      * Create a new controller instance.
@@ -36,5 +38,32 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+     /**
+      * Create a new controller instance.
+      *
+      * @return void
+      */
+
+      public function login(Request $request){
+
+        if(Auth::attempt(['email' => $request->input("email"),
+        'password'=> $request->input("password")]))
+        {
+            $user = User::where('email',$request->email)->first();
+            if($user->isCacheir())
+            {
+                return redirect()->route('cacheir');
+            }
+            else if($user->isStore())
+            {
+                return redirect()->route('store');
+            }
+            else{
+                return redirect()->route('admin.dashboard');
+            }
+        }
+        return redirect()->back();
     }
 }

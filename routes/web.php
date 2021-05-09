@@ -13,10 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::group(['namespace'=>'Auth'],function(){
+//     Route::get('login','LoginController@getLogin')->name('get.login');
+//     Route::post('login','LoginController@login')->name('login');
+//     Route::get('/logout', 'LoginController@logout');
+
+// });
+// Route::post('/login',['uses' => 'LoginController@login','as' => 'login']);
+
+// Route::post('/login','LoginController@login')->name('login.custom');
+
+Route::get('/', function () {
+    return redirect(route('login'));
+ });
+
+// Route::group(['middleware' => ['auth', 'store'], 'prefix' => 'user'], function () {
+//     Route::get('/', 'HomeController@index')->name('user');
+// });
+
+// admin protected routes
+
+
+
+
+
+

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\LanguageRequest;
-use App\Models\Language;
+use App\Language;
 
 class LanguagesController extends Controller
 {

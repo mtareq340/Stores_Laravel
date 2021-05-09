@@ -16,9 +16,12 @@ class ProductOrder extends Migration
         Schema::create('product_order', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->integer('product_id')->unsigned()->nullable();
+            $table->unsignedInteger('product_id')->nullable();
+            $table->unsignedInteger('order_id')->nullable();
+            $table->integer('quantity')->default(1);
+            $table->double('price')->default(0);
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }

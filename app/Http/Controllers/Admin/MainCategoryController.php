@@ -5,29 +5,38 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\MainCategoryRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Config;
 use DB;
 use Illuminate\Support\Str;
-use App\Models\MainCategory;
+use App\MainCategory;
 
 class MainCategoryController extends Controller
 {
     public function index(){
+        if (! Gate::allows('عرض_المخزن')) {
+            return abort(401);
+        }
         $default_language = get_default_lang();
         $maincategories = MainCategory::where('translation_lang', $default_language)->selection()->get();
         return view('admin.maincategories.index',compact('maincategories'));
     }
     public function create(){
+        if (! Gate::allows('عرض_المخزن')) {
+            return abort(401);
+        }
         return view('admin.maincategories.create');
     }
 
 
     public function store(MainCategoryRequest $request)
     {
+        if (! Gate::allows('عرض_المخزن')) {
+            return abort(401);
+        }
 
         try {
 
-            $main_categories = collect($request->category);
 
             $filter = $main_categories->filter(function ($value, $key) {
                 return $value['abbr'] == get_default_lang();

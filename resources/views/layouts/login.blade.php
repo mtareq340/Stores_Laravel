@@ -35,8 +35,7 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css-rtl/style-rtl.css')}}">
     <!-- END Custom CSS-->
-    @notify_css
-    <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">s
+    <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -44,7 +43,7 @@
     </style>
 </head>
 <body class="vertical-layout vertical-menu 1-column   menu-expanded blank-page blank-page"
-      data-open="click" data-menu="vertical-menu" data-col="1-column">
+      data-open="click" data-menu="vertical-menu" data-col="1-column" style="background: url({{ URL::asset('assets/dashboard_files/img/tire.jpg')}})">
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 <div class="app-content content">
     <div class="content-wrapper">
@@ -75,7 +74,6 @@
 <script>
 
 </script>
-@notify_js
-@notify_render
+
 </body>
 </html>

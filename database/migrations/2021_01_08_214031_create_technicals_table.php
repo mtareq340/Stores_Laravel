@@ -15,13 +15,12 @@ class CreateTechnicalsTable extends Migration
     {
         Schema::create('technicals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('store_id')->unsigned();
+            $table->unsignedInteger('store_id');
             $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->string('number');
+            $table->string('email')->nullable();
+            $table->string('phone');
 
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
         });
